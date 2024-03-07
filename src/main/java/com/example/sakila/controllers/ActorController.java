@@ -6,6 +6,7 @@ import com.example.sakila.entities.Actor;
 import com.example.sakila.input.ActorInput;
 import com.example.sakila.repositories.ActorRepository;
 import com.example.sakila.services.ActorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ public class ActorController {
 
     private final ActorService actorService;
 
+
     public ActorController(ActorService actorService) {
         this.actorService = actorService;
     }
@@ -30,22 +32,10 @@ public class ActorController {
     }
 
     @GetMapping("/actors/{id}")
-    public Actor getActorById(@PathVariable Short id){
-        return actorRepository.findById(id)
-                .orElseThrow(()-> new ResourceAccessException("No such actor."));
-
+    public Actor getActorById(@PathVariable Short id) {
+        return actorService.getActorById(id);
     }
-    // partial
-    @GetMapping("/{id}/films")
-    public List<FilmPartial> getFilmsByActor(@PathVariable Short id) {
-        return actorService.getFilmsByActorId(id);
-    }
-    // partial
-    @GetMapping("/partial")
-    public List<ActorPartial> getActorsPartially() {
-        return actorService.getAllActorsPartially();
-    }
-    @PostMapping("/actors")
+   @PostMapping("/actors")
     public Actor createActor(@Validated @RequestBody ActorInput data){
         final var actor = new Actor();
         actor.setFirstName(data.getFirstName());
@@ -82,6 +72,21 @@ public class ActorController {
     }
 
 
+    // PARTIAL CONTROLLERS
+    @GetMapping("/{id}/films")
+    public List<FilmPartial> getFilmsByActor(@PathVariable Short id) {
+        return actorService.getFilmsByActorId(id);
+    }
+
+    @GetMapping("/partial")
+    public List<ActorPartial> getActorsPartially() {
+        return actorService.getAllActorsPartially();
+    }
+
+    @GetMapping("/partial/firstName")
+    public List<ActorPartial> findActorByFirstName(@RequestParam String firstName) {
+        return actorService.getActorByFirstName(firstName);
+    }
 
 
 

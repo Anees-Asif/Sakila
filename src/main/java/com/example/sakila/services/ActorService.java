@@ -9,6 +9,7 @@ import com.example.sakila.repositories.FilmRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
@@ -22,6 +23,10 @@ public class ActorService {
     @Autowired
     FilmRepository filmRepository;
 
+    public Actor getActorById(Short id) {
+        return actorRepository.findById(id)
+                .orElseThrow(() -> new ResourceAccessException("Actor not found for id: " + id));
+    }
 
     @Transactional
     public void updateActorFilms(Short actorId, List<Short> filmIds) {
@@ -60,6 +65,14 @@ public class ActorService {
                 .map(film -> new FilmPartial(film.getId(), film.getTitle(), film.getLanguageId()))
                 .collect(Collectors.toList());
     }
+
+    // QUERY METHODS
+
+    public List<ActorPartial> getActorByFirstName(String firstName) {
+        return actorRepository.findActorByFirstNamePartially(firstName);
+    }
+
+
 
 
 }

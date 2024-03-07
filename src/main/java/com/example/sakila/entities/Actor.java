@@ -23,6 +23,10 @@ public class Actor {
     private String lastName;
     @ManyToMany(mappedBy = "cast")
     private List<Film> films = new ArrayList<>();
+
+
+
+
     public void addFilm(Film film) {
 
         this.films.add(film);
@@ -35,4 +39,5 @@ public class Actor {
 
         film.getCast().remove(this);
     }
+
 }

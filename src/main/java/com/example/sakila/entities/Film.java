@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -18,21 +19,29 @@ import java.util.List;
 @Getter
 @Setter
 public class Film {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "film_id")
+    @Column(name = "film_id")
     private Short id;
-    @Column (name = "title")
+
+    @Column(name = "title")
     private String title;
-    @Column (name = "language_id")
-    private Byte languageId;
-    @Column (name = "rental_duration")
+
+    // Remove the direct languageId field
+     @Column(name = "language_id")
+     private Byte languageId;
+
+    @Column(name = "rental_duration")
     private Byte rentalDuration;
-    @Column (name = "rental_rate")
+
+    @Column(name = "rental_rate")
     private BigDecimal rentalRate;
-    @Column (name = "replacement_cost")
+
+    @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
-    @Column (name = "last_update")
+
+    @Column(name = "last_update")
     private Timestamp lastUpdate;
 
     @ManyToMany

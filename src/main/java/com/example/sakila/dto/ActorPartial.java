@@ -1,8 +1,9 @@
 package com.example.sakila.dto;
 
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
+@Table(name ="actor")
 @Getter
 @Setter
 public class ActorPartial {
