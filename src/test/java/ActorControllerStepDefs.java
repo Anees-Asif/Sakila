@@ -6,46 +6,53 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.en_old.Ac;
+import org.mockito.Mockito;
+import org.springframework.http.ResponseEntity;
 
-import static org.junit.Assert.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyShort;
+import static org.mockito.Mockito.when;
 
 public class ActorControllerStepDefs {
+
     private ActorService actorService;
-    private final short expectedId = 1;
+    private ActorController actorController;
+    private ResponseEntity<Actor> responseEntity;
 
-    private final ActorPartial expectedActor = new ActorPartial(expectedId, "PENELOPE", "GUINESS");
-    private Actor actualActor;
     @Before
-    public void setUp(){
-        actorService = mock(ActorService.class);
-
+    public void setUp() {
+        actorService = Mockito.mock(ActorService.class);
+        actorController = new ActorController(actorService);
     }
+
     @Given("the actor with id {short} exists")
-    public void GivenActor1Exists(Short id) {
-        doReturn(expectedActor).when(actorService).getActorById(id); // Include the method argument here
+    public void theActorWithIdExists(short id) {
+        Actor expectedActor = new Actor();
+        expectedActor.setId(id);
+        expectedActor.setFirstName("John");
+        expectedActor.setLastName("Doe");
+
+        when(actorService.getActorById(anyShort())).thenReturn(expectedActor);
     }
 
-    @When("When get request is made to \\/actors\\/{short}")
-    public void whenRequestWithId(short Id){
-        final ActorController actorController = new ActorController(actorService);
-        try{
-            actualActor = actorController.getActorById(Id);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
+   /* @When("a get request is made to actors/{int}")
+    public void getRequestIsMadeToActors(short id) {
+        responseEntity = ResponseEntity.ok(actorController.getActorById(id));
+    }*/
+    @When("^a get request is made to actors/(\\d+)$")
+    public void getRequestIsMadeToActorsWithRegex(short id) {
+        responseEntity = ResponseEntity.ok(actorController.getActorById(id));
     }
+
     @Then("an actor is returned")
-    public  void thenActorIsReturned(){
-        assertNotNull(actualActor);
+    public void anActorIsReturned() {
+        assertNotNull(responseEntity.getBody());
+        Actor actualActor = responseEntity.getBody();
         assertEquals("John", actualActor.getFirstName());
         assertEquals("Doe", actualActor.getLastName());
     }
+
+
 
 }
