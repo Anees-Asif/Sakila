@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FilmController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sakila</a> &gt; <a href="index.source.html" class="el_package">com.example.sakila.controllers</a> &gt; <span class="el_source">FilmController.java</span></div><h1>FilmController.java</h1><pre class="source lang-java linenums">package com.example.sakila.controllers;
+
+
+import com.example.sakila.entities.Film;
+import com.example.sakila.input.FilmInput;
+import com.example.sakila.repositories.FilmRepository;
+
+import com.example.sakila.services.FilmService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+
+import java.util.List;
+
+@RestController
+public class FilmController {
+    private final FilmService filmService;
+    @Autowired
+    FilmRepository filmRepository;
+
+    @Autowired
+<span class="nc" id="L24">    public FilmController(FilmService filmService) {</span>
+<span class="nc" id="L25">        this.filmService = filmService;</span>
+<span class="nc" id="L26">    }</span>
+
+
+    // QUERY METHODS
+    @GetMapping(&quot;/search/title&quot;)
+    public ResponseEntity&lt;List&lt;Film&gt;&gt; getFilmsByTitle(@RequestParam String title) {
+<span class="nc" id="L32">        List&lt;Film&gt; films = filmService.searchFilmsByTitle(title);</span>
+<span class="nc" id="L33">        return ResponseEntity.ok(films);</span>
+    }
+    @GetMapping(&quot;/search/id&quot;)
+    public ResponseEntity&lt;List&lt;Film&gt;&gt; searchFilmsByLanguageId(@RequestParam Byte languageId) {
+<span class="nc" id="L37">        List&lt;Film&gt; films = filmService.searchFilmsByLanguageId(languageId);</span>
+<span class="nc" id="L38">        return ResponseEntity.ok(films);</span>
+    }
+
+
+/*    @GetMapping(&quot;/search/language&quot;)
+    public ResponseEntity&lt;List&lt;Film&gt;&gt; getFilmsByLanguageName(@RequestParam String languageName){
+        List&lt;Film&gt; films = filmService.getFilmsByLanguageName(languageName);
+        return ResponseEntity.ok(films);
+    }*/
+
+
+
+
+
+    @GetMapping(&quot;/films&quot;)
+    public List&lt;Film&gt; listFilms(){
+<span class="nc" id="L54">        return filmRepository.findAll();</span>
+    }
+
+    
+
+    @GetMapping(&quot;/films/{id}&quot;)
+    public Film getFilmById(@PathVariable Short id){
+<span class="nc" id="L61">        return filmRepository.findById(id)</span>
+<span class="nc" id="L62">                .orElseThrow(()-&gt; new ResourceAccessException(&quot;No such film.&quot;));</span>
+
+    }
+    @PostMapping(&quot;/films&quot;)
+    public Film createFilm(@Validated @RequestBody FilmInput data) {
+<span class="nc" id="L67">        final var film = new Film();</span>
+<span class="nc" id="L68">        film.setTitle(data.getTitle());</span>
+<span class="nc" id="L69">        film.setLanguageId(data.getLanguageId());</span>
+<span class="nc" id="L70">        film.setRentalDuration((data.getRentalDuration()));</span>
+<span class="nc" id="L71">        film.setRentalRate((data.getRentalRate()));</span>
+<span class="nc" id="L72">        film.setReplacementCost((data.getReplacementCost()));</span>
+<span class="nc" id="L73">        film.setLastUpdate(data.getLastUpdate());</span>
+<span class="nc" id="L74">        return filmRepository.save(film);</span>
+
+
+    }
+    @PatchMapping(&quot;/films/{id}&quot;)
+    public Film updateFilm(@PathVariable Short id, @RequestBody FilmInput data) {
+<span class="nc" id="L80">        Film film = filmRepository.findById(id)</span>
+<span class="nc" id="L81">                .orElseThrow(() -&gt; new ResourceAccessException(&quot;No such film with ID: &quot; + id));</span>
+
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (data.getTitle() != null) {</span>
+<span class="nc" id="L84">            film.setTitle(data.getTitle());</span>
+        }
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (data.getLanguageId() != null) {</span>
+<span class="nc" id="L87">            film.setLanguageId(data.getLanguageId());</span>
+        }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (data.getRentalDuration() != null) {</span>
+<span class="nc" id="L90">            film.setRentalDuration(data.getRentalDuration());</span>
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (data.getRentalRate() != null) {</span>
+<span class="nc" id="L93">            film.setRentalRate(data.getRentalRate());</span>
+        }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (data.getReplacementCost() != null) {</span>
+<span class="nc" id="L96">            film.setReplacementCost(data.getReplacementCost());</span>
+        }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (data.getLastUpdate() != null) {</span>
+<span class="nc" id="L99">            film.setLastUpdate(data.getLastUpdate());</span>
+        }
+
+<span class="nc" id="L102">        return filmRepository.save(film);</span>
+    }
+    @DeleteMapping(&quot;/films/{id}&quot;)
+    public void deleteFilm(@PathVariable @RequestBody Short id) {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (!filmRepository.existsById(id)) {</span>
+<span class="nc" id="L107">            throw new ResourceAccessException(&quot;No such actor with id: &quot; + id);</span>
+        }
+<span class="nc" id="L109">        filmRepository.deleteById(id);</span>
+<span class="nc" id="L110">    }</span>
+
+
+
+
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

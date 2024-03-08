@@ -1,0 +1,16 @@
+com\example\sakila\entities\Film.class
+com\example\sakila\input\FilmInput.class
+com\example\sakila\repositories\ActorRepository.class
+com\example\sakila\SakilaApplication.class
+com\example\sakila\repositories\FilmRepository.class
+com\example\sakila\entities\Actor.class
+com\example\sakila\input\ActorInput.class
+com\example\sakila\dto\ActorPartial.class
+com\example\sakila\repositories\LanguageRepository.class
+com\example\sakila\services\FilmService.class
+com\example\sakila\controllers\FilmController.class
+com\example\sakila\dto\FilmPartial.class
+com\example\sakila\entities\Language.class
+com\example\sakila\services\ActorService.class
+com\example\sakila\controllers\ActorController.class
+com\example\sakila\controllers\HelloController.class

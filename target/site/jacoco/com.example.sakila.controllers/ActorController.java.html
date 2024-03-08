@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActorController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sakila</a> &gt; <a href="index.source.html" class="el_package">com.example.sakila.controllers</a> &gt; <span class="el_source">ActorController.java</span></div><h1>ActorController.java</h1><pre class="source lang-java linenums">package com.example.sakila.controllers;
+
+import com.example.sakila.dto.ActorPartial;
+import com.example.sakila.dto.FilmPartial;
+import com.example.sakila.entities.Actor;
+import com.example.sakila.input.ActorInput;
+import com.example.sakila.repositories.ActorRepository;
+import com.example.sakila.services.ActorService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+
+import java.util.List;
+
+@RestController
+public class ActorController {
+    @Autowired
+    ActorRepository actorRepository;
+
+    private final ActorService actorService;
+
+
+<span class="fc" id="L26">    public ActorController(ActorService actorService) {</span>
+<span class="fc" id="L27">        this.actorService = actorService;</span>
+<span class="fc" id="L28">    }</span>
+    @GetMapping(&quot;/actors&quot;)
+    public List&lt;Actor&gt; listActors(){
+<span class="nc" id="L31">        return actorRepository.findAll();</span>
+    }
+
+    @GetMapping(&quot;/actors/{id}&quot;)
+    public Actor getActorById(@PathVariable Short id) {
+<span class="fc" id="L36">        return actorService.getActorById(id);</span>
+    }
+   @PostMapping(&quot;/actors&quot;)
+    public Actor createActor(@Validated @RequestBody ActorInput data){
+<span class="nc" id="L40">        final var actor = new Actor();</span>
+<span class="nc" id="L41">        actor.setFirstName(data.getFirstName());</span>
+<span class="nc" id="L42">        actor.setLastName(data.getLastName());</span>
+<span class="nc" id="L43">        return  actorRepository.save(actor);</span>
+
+    }
+    @PatchMapping(&quot;/actors/{id}&quot;)
+    public Actor updateActor(@PathVariable Short id, @Validated @RequestBody ActorInput data) {
+<span class="nc" id="L48">        Actor actor = actorRepository.findById(id)</span>
+<span class="nc" id="L49">                .orElseThrow(() -&gt; new ResourceAccessException(&quot;No such actor with id: &quot; + id));</span>
+
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (data.getFirstName() != null) {</span>
+<span class="nc" id="L52">            actor.setFirstName(data.getFirstName());</span>
+        }
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (data.getLastName() != null) {</span>
+<span class="nc" id="L55">            actor.setLastName(data.getLastName());</span>
+        }
+
+<span class="nc" id="L58">        return actorRepository.save(actor);</span>
+    }
+    @PatchMapping(&quot;/actors/{actorId}/films&quot;)
+    public ResponseEntity&lt;Void&gt; updateActorFilms(@PathVariable Short actorId, @RequestBody List&lt;Short&gt; filmIds) {
+<span class="nc" id="L62">        actorService.updateActorFilms(actorId, filmIds);</span>
+<span class="nc" id="L63">        return ResponseEntity.ok().build();</span>
+    }
+
+    @DeleteMapping(&quot;/actors/{id}&quot;)
+    public void deleteActor(@PathVariable @RequestBody Short id) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (!actorRepository.existsById(id)) {</span>
+<span class="nc" id="L69">            throw new ResourceAccessException(&quot;No such actor with id: &quot; + id);</span>
+        }
+<span class="nc" id="L71">        actorRepository.deleteById(id);</span>
+<span class="nc" id="L72">    }</span>
+
+
+    // PARTIAL CONTROLLERS
+    @GetMapping(&quot;/{id}/films&quot;)
+    public List&lt;FilmPartial&gt; getFilmsByActor(@PathVariable Short id) {
+<span class="nc" id="L78">        return actorService.getFilmsByActorId(id);</span>
+    }
+
+    @GetMapping(&quot;/partial&quot;)
+    public List&lt;ActorPartial&gt; getActorsPartially() {
+<span class="nc" id="L83">        return actorService.getAllActorsPartially();</span>
+    }
+
+    @GetMapping(&quot;/partial/firstName&quot;)
+    public List&lt;ActorPartial&gt; findActorByFirstName(@RequestParam String firstName) {
+<span class="nc" id="L88">        return actorService.getActorByFirstName(firstName);</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

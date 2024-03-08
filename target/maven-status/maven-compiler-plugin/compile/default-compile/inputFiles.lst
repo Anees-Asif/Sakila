@@ -1,0 +1,16 @@
+E:\TSI\sakila\src\main\java\com\example\sakila\dto\FilmPartial.java
+E:\TSI\sakila\src\main\java\com\example\sakila\repositories\LanguageRepository.java
+E:\TSI\sakila\src\main\java\com\example\sakila\entities\Film.java
+E:\TSI\sakila\src\main\java\com\example\sakila\SakilaApplication.java
+E:\TSI\sakila\src\main\java\com\example\sakila\services\FilmService.java
+E:\TSI\sakila\src\main\java\com\example\sakila\input\ActorInput.java
+E:\TSI\sakila\src\main\java\com\example\sakila\controllers\FilmController.java
+E:\TSI\sakila\src\main\java\com\example\sakila\repositories\FilmRepository.java
+E:\TSI\sakila\src\main\java\com\example\sakila\entities\Actor.java
+E:\TSI\sakila\src\main\java\com\example\sakila\repositories\ActorRepository.java
+E:\TSI\sakila\src\main\java\com\example\sakila\controllers\ActorController.java
+E:\TSI\sakila\src\main\java\com\example\sakila\dto\ActorPartial.java
+E:\TSI\sakila\src\main\java\com\example\sakila\controllers\HelloController.java
+E:\TSI\sakila\src\main\java\com\example\sakila\services\ActorService.java
+E:\TSI\sakila\src\main\java\com\example\sakila\input\FilmInput.java
+E:\TSI\sakila\src\main\java\com\example\sakila\entities\Language.java
