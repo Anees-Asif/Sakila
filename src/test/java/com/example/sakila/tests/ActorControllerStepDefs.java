@@ -1,3 +1,5 @@
+package com.example.sakila.tests;
+
 import com.example.sakila.controllers.ActorController;
 import com.example.sakila.dto.ActorPartial;
 import com.example.sakila.entities.Actor;
