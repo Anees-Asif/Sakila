@@ -17,8 +17,8 @@ import java.util.List;
 @Entity
 @Table(name =&quot;film&quot;)
 @Getter
-<span class="nc" id="L20">@Setter</span>
-<span class="nc" id="L21">public class Film {</span>
+<span class="pc" id="L20">@Setter</span>
+<span class="fc" id="L21">public class Film {</span>
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ import java.util.List;
 <span class="nc" id="L26">    private Short id;</span>
 
     @Column(name = &quot;title&quot;)
-<span class="nc" id="L29">    private String title;</span>
+<span class="fc" id="L29">    private String title;</span>
 
     // Remove the direct languageId field
      @Column(name = &quot;language_id&quot;)
@@ -44,7 +44,7 @@ import java.util.List;
     @Column(name = &quot;last_update&quot;)
 <span class="nc" id="L45">    private Timestamp lastUpdate;</span>
 
-<span class="nc" id="L47">    @ManyToMany</span>
+<span class="fc" id="L47">    @ManyToMany</span>
     @JsonIgnore
     @JoinTable(
             name = &quot;film_actor&quot;,

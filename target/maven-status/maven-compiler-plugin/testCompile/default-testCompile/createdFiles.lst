@@ -1,2 +1,3 @@
 com\example\sakila\tests\ActorControllerStepDefs.class
 com\example\sakila\tests\RunCucumberTest.class
+com\example\sakila\tests\FilmControllerStepdefs.class

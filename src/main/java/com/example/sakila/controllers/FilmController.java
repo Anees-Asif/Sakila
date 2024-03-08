@@ -58,8 +58,7 @@ public class FilmController {
 
     @GetMapping("/films/{id}")
     public Film getFilmById(@PathVariable Short id){
-        return filmRepository.findById(id)
-                .orElseThrow(()-> new ResourceAccessException("No such film."));
+        return filmService.getFilmById(id);
 
     }
     @PostMapping("/films")

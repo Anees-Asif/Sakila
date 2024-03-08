@@ -21,9 +21,9 @@ public class FilmController {
     FilmRepository filmRepository;
 
     @Autowired
-<span class="nc" id="L24">    public FilmController(FilmService filmService) {</span>
-<span class="nc" id="L25">        this.filmService = filmService;</span>
-<span class="nc" id="L26">    }</span>
+<span class="fc" id="L24">    public FilmController(FilmService filmService) {</span>
+<span class="fc" id="L25">        this.filmService = filmService;</span>
+<span class="fc" id="L26">    }</span>
 
 
     // QUERY METHODS
@@ -58,56 +58,55 @@ public class FilmController {
 
     @GetMapping(&quot;/films/{id}&quot;)
     public Film getFilmById(@PathVariable Short id){
-<span class="nc" id="L61">        return filmRepository.findById(id)</span>
-<span class="nc" id="L62">                .orElseThrow(()-&gt; new ResourceAccessException(&quot;No such film.&quot;));</span>
+<span class="fc" id="L61">        return filmService.getFilmById(id);</span>
 
     }
     @PostMapping(&quot;/films&quot;)
     public Film createFilm(@Validated @RequestBody FilmInput data) {
-<span class="nc" id="L67">        final var film = new Film();</span>
-<span class="nc" id="L68">        film.setTitle(data.getTitle());</span>
-<span class="nc" id="L69">        film.setLanguageId(data.getLanguageId());</span>
-<span class="nc" id="L70">        film.setRentalDuration((data.getRentalDuration()));</span>
-<span class="nc" id="L71">        film.setRentalRate((data.getRentalRate()));</span>
-<span class="nc" id="L72">        film.setReplacementCost((data.getReplacementCost()));</span>
-<span class="nc" id="L73">        film.setLastUpdate(data.getLastUpdate());</span>
-<span class="nc" id="L74">        return filmRepository.save(film);</span>
+<span class="nc" id="L66">        final var film = new Film();</span>
+<span class="nc" id="L67">        film.setTitle(data.getTitle());</span>
+<span class="nc" id="L68">        film.setLanguageId(data.getLanguageId());</span>
+<span class="nc" id="L69">        film.setRentalDuration((data.getRentalDuration()));</span>
+<span class="nc" id="L70">        film.setRentalRate((data.getRentalRate()));</span>
+<span class="nc" id="L71">        film.setReplacementCost((data.getReplacementCost()));</span>
+<span class="nc" id="L72">        film.setLastUpdate(data.getLastUpdate());</span>
+<span class="nc" id="L73">        return filmRepository.save(film);</span>
 
 
     }
     @PatchMapping(&quot;/films/{id}&quot;)
     public Film updateFilm(@PathVariable Short id, @RequestBody FilmInput data) {
-<span class="nc" id="L80">        Film film = filmRepository.findById(id)</span>
-<span class="nc" id="L81">                .orElseThrow(() -&gt; new ResourceAccessException(&quot;No such film with ID: &quot; + id));</span>
+<span class="nc" id="L79">        Film film = filmRepository.findById(id)</span>
+<span class="nc" id="L80">                .orElseThrow(() -&gt; new ResourceAccessException(&quot;No such film with ID: &quot; + id));</span>
 
-<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (data.getTitle() != null) {</span>
-<span class="nc" id="L84">            film.setTitle(data.getTitle());</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (data.getTitle() != null) {</span>
+<span class="nc" id="L83">            film.setTitle(data.getTitle());</span>
         }
-<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (data.getLanguageId() != null) {</span>
-<span class="nc" id="L87">            film.setLanguageId(data.getLanguageId());</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (data.getLanguageId() != null) {</span>
+<span class="nc" id="L86">            film.setLanguageId(data.getLanguageId());</span>
         }
-<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (data.getRentalDuration() != null) {</span>
-<span class="nc" id="L90">            film.setRentalDuration(data.getRentalDuration());</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (data.getRentalDuration() != null) {</span>
+<span class="nc" id="L89">            film.setRentalDuration(data.getRentalDuration());</span>
         }
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (data.getRentalRate() != null) {</span>
-<span class="nc" id="L93">            film.setRentalRate(data.getRentalRate());</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (data.getRentalRate() != null) {</span>
+<span class="nc" id="L92">            film.setRentalRate(data.getRentalRate());</span>
         }
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (data.getReplacementCost() != null) {</span>
-<span class="nc" id="L96">            film.setReplacementCost(data.getReplacementCost());</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (data.getReplacementCost() != null) {</span>
+<span class="nc" id="L95">            film.setReplacementCost(data.getReplacementCost());</span>
         }
-<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (data.getLastUpdate() != null) {</span>
-<span class="nc" id="L99">            film.setLastUpdate(data.getLastUpdate());</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (data.getLastUpdate() != null) {</span>
+<span class="nc" id="L98">            film.setLastUpdate(data.getLastUpdate());</span>
         }
 
-<span class="nc" id="L102">        return filmRepository.save(film);</span>
+<span class="nc" id="L101">        return filmRepository.save(film);</span>
     }
     @DeleteMapping(&quot;/films/{id}&quot;)
     public void deleteFilm(@PathVariable @RequestBody Short id) {
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (!filmRepository.existsById(id)) {</span>
-<span class="nc" id="L107">            throw new ResourceAccessException(&quot;No such actor with id: &quot; + id);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (!filmRepository.existsById(id)) {</span>
+<span class="nc" id="L106">            throw new ResourceAccessException(&quot;No such actor with id: &quot; + id);</span>
         }
-<span class="nc" id="L109">        filmRepository.deleteById(id);</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L108">        filmRepository.deleteById(id);</span>
+<span class="nc" id="L109">    }</span>
 
 
 

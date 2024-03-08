@@ -1,11 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 sakila,com.example.sakila.controllers,ActorController,95,11,6,0,21,4,12,2,9,2
 sakila,com.example.sakila.controllers,HelloController,5,0,0,0,2,0,2,0,2,0
-sakila,com.example.sakila.controllers,FilmController,152,0,14,0,37,0,17,0,10,0
-sakila,com.example.sakila.entities,Film,82,0,0,0,17,0,18,0,18,0
+sakila,com.example.sakila.controllers,FilmController,133,11,14,0,32,4,14,2,7,2
+sakila,com.example.sakila.entities,Film,63,19,0,0,13,4,14,4,14,4
 sakila,com.example.sakila.entities,Language,17,0,0,0,4,0,5,0,5,0
 sakila,com.example.sakila.entities,Actor,32,26,0,0,8,5,5,6,5,6
 sakila,com.example.sakila.services,ActorService,143,0,4,0,27,0,16,0,14,0
-sakila,com.example.sakila.services,FilmService,13,0,0,0,3,0,3,0,3,0
+sakila,com.example.sakila.services,FilmService,28,0,0,0,5,0,5,0,5,0
 sakila,com.example.sakila.dto,FilmPartial,43,0,0,0,11,0,10,0,10,0
 sakila,com.example.sakila.dto,ActorPartial,36,0,0,0,11,0,8,0,8,0
