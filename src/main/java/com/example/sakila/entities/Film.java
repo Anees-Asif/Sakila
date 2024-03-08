@@ -54,6 +54,9 @@ public class Film {
     @ToString.Exclude
     @Setter(AccessLevel.NONE)
     private List<Actor> cast = new ArrayList<>();
+
+
+
     public void addActor(Actor actor) {
         // Add the actor to the film's list of cast
         this.cast.add(actor);
@@ -67,5 +70,6 @@ public class Film {
         // Remove the film from the actor's list of films
         actor.getFilms().remove(this);
     }
+
 
 }

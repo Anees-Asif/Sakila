@@ -17,20 +17,20 @@ import java.util.List;
 @Entity
 @Table(name =&quot;film&quot;)
 @Getter
-<span class="pc" id="L20">@Setter</span>
+<span class="fc" id="L20">@Setter</span>
 <span class="fc" id="L21">public class Film {</span>
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = &quot;film_id&quot;)
-<span class="nc" id="L26">    private Short id;</span>
+<span class="fc" id="L26">    private Short id;</span>
 
     @Column(name = &quot;title&quot;)
 <span class="fc" id="L29">    private String title;</span>
 
     // Remove the direct languageId field
      @Column(name = &quot;language_id&quot;)
-<span class="nc" id="L33">     private Byte languageId;</span>
+<span class="fc" id="L33">     private Byte languageId;</span>
 
     @Column(name = &quot;rental_duration&quot;)
 <span class="nc" id="L36">    private Byte rentalDuration;</span>
@@ -54,19 +54,23 @@ import java.util.List;
     @ToString.Exclude
     @Setter(AccessLevel.NONE)
 <span class="nc" id="L56">    private List&lt;Actor&gt; cast = new ArrayList&lt;&gt;();</span>
+
+
+
     public void addActor(Actor actor) {
         // Add the actor to the film's list of cast
-<span class="nc" id="L59">        this.cast.add(actor);</span>
+<span class="nc" id="L62">        this.cast.add(actor);</span>
         // Add the film to the actor's list of films
-<span class="nc" id="L61">        actor.getFilms().add(this);</span>
-<span class="nc" id="L62">    }</span>
+<span class="nc" id="L64">        actor.getFilms().add(this);</span>
+<span class="nc" id="L65">    }</span>
 
     public void removeActor(Actor actor) {
         // Remove the actor from the film's list of cast
-<span class="nc" id="L66">        this.cast.remove(actor);</span>
+<span class="nc" id="L69">        this.cast.remove(actor);</span>
         // Remove the film from the actor's list of films
-<span class="nc" id="L68">        actor.getFilms().remove(this);</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L71">        actor.getFilms().remove(this);</span>
+<span class="nc" id="L72">    }</span>
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

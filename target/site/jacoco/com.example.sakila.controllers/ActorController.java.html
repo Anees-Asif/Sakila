@@ -75,7 +75,7 @@ public class ActorController {
     // PARTIAL CONTROLLERS
     @GetMapping(&quot;/{id}/films&quot;)
     public List&lt;FilmPartial&gt; getFilmsByActor(@PathVariable Short id) {
-<span class="nc" id="L78">        return actorService.getFilmsByActorId(id);</span>
+<span class="fc" id="L78">        return actorService.getFilmsByActorId(id);</span>
     }
 
     @GetMapping(&quot;/partial&quot;)

@@ -3,6 +3,7 @@ package com.example.sakila.tests;
 import com.example.sakila.controllers.FilmController;
 import com.example.sakila.entities.Actor;
 import com.example.sakila.entities.Film;
+import com.example.sakila.input.FilmInput;
 import com.example.sakila.services.FilmService;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -10,6 +11,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -20,6 +25,7 @@ public class FilmControllerStepdefs {
     private FilmController filmController;
     private FilmService filmService;
     private ResponseEntity<Film> responseEntity;
+    private FilmInput filmInput;
     @Before
     public void setUp() {
         filmService = Mockito.mock(FilmService.class);
@@ -50,4 +56,16 @@ public class FilmControllerStepdefs {
         assertEquals("Animals2", actualFilm.getTitle());
 
     }
+    @Given("film input data for {string} is prepared")
+    public void filmInputDataForIsPrepared(String title) {
+        this.filmInput = new FilmInput(); // Assume FilmInput is a proper DTO with a constructor and setters
+        filmInput.setTitle(title);
+
+    }
+
+
+
+
+
+
 }
