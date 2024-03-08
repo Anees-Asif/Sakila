@@ -3,9 +3,10 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"pretty"}
+        features = "src/test/resources/features",
+        glue = "com.example.sakila", // should be the package containing your step definitions
+        plugin = {"pretty", "html:target/cucumber"}
 )
 public class RunCucumberTest {
-
-
+    // No methods needed, this is just a configuration class
 }
